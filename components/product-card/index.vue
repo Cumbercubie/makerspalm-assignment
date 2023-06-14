@@ -28,7 +28,7 @@ const dateDiff = Math.floor(
 );
 </script>
 <template>
-    <nuxt-link :to="`/${id}`">
+    <NuxtLink :to="`/${id}`">
         <div
              class="max-w-screen cursor-pointer hover:bg-gray-100 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="rounded-t-lg w-full h-auto sm:w-full overflow-hidden">
@@ -52,5 +52,5 @@ const dateDiff = Math.floor(
                 </div>
             </div>
         </div>
-    </nuxt-link>
+    </NuxtLink>
 </template>

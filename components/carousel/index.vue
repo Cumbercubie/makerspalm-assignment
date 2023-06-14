@@ -13,7 +13,6 @@ onMounted(() => {
         position: index,
         el: document.getElementById(`carousel-item-${index}`)
     }))
-    console.log(carouselItems)
     const carousel = new Carousel(carouselItems);
     const $prevButton = document.getElementById("data-carousel-prev");
     const $nextButton = document.getElementById("data-carousel-next");
@@ -38,8 +37,8 @@ onMounted(() => {
                      alt="..." />
             </div>
             <!-- <div :id="`carousel-item-${index}`" v-for="(item, index) in items" class="hidden duration-700 ease-in-out">
-                    <img :src="item" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div> -->
+                        <img :src="item" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div> -->
         </div>
         <!-- Slider controls -->
         <button id="data-carousel-prev" type="button"

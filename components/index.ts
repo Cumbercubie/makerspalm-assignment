@@ -1,0 +1,1 @@
+import * from "./product-card/index.vue"

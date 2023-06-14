@@ -17,6 +17,8 @@ pnpm install
 yarn install
 ```
 
+Make sure to include the `.env` file at root.
+
 ## Development Server
 
 Start the development server on `http://localhost:3000`:

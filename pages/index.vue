@@ -1,6 +1,10 @@
+
 <script setup>
-const { data } = await useFetch('/api/products');
-const products = ref(data.value)
+import { useProductStore } from '~/stores/products';
+// const { data } = await useFetch('/api/products');
+// const products = ref(data.value)
+const productStore = useProductStore();
+const products = computed(() => productStore.getProducts)
 const handleSelectOption = (selectedSortOption) => {
     switch (selectedSortOption) {
         case "PRICE_LOW_TO_HIGH":

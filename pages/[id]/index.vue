@@ -1,15 +1,22 @@
 <script setup>
+import { react } from '@babel/types';
+import products from '~/server/api/products';
+import { useProductStore } from '~/stores/products';
+
 const route = useRoute();
 
 const { data } = await useFetch(`/api/product`, {
     server: true,
     query: { id: route.params.id }
 });
+const productStore = useProductStore();
 if (!data.value?.id) {
     throw createError({ statusCode: 404, statusMessage: 'Not found any products' })
 }
-const product = ref(data.value)
-const selectedImageUrl = ref(product.value.additionalImageUrls[0]);
+productStore.updateProduct(data.value)
+const product = computed(() => productStore.getProduct(data.value.id))
+// console.log(productStore.getProduct(product.id))
+const selectedImageUrl = ref(productStore.getProduct(data.value.id).defaultImageUrl);
 
 
 const onImageSelected = (event) => {
@@ -26,9 +33,10 @@ const onImageSelected = (event) => {
                 <!-- <Carousel :items="product.additionalImageUrls" /> -->
                 <img class="rounded-lg mx-auto" :src="selectedImageUrl" alt="product image" />
                 <div class="grid mt-4 gap-2 grid-flow-col auto-cols-auto">
-                    <img v-for="imageurl in product.additionalImageUrls" @click="onImageSelected"
-                         class="cursor-pointer rounded-lg w-32 h-32  hover:border-2 hover:border-gray-900" :src="imageurl"
-                         alt="product image" />
+                    <img v-for="imageurl in [product.defaultImageUrl, ...product.additionalImageUrls]"
+                         @click="onImageSelected"
+                         class="cursor-pointer rounded-lg aspect-square hover:border-2 hover:border-gray-900"
+                         :src="imageurl" alt="product image" />
                 </div>
             </div>
             <div class="justify-self-start ml-5">
